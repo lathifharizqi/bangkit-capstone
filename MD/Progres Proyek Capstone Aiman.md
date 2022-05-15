@@ -13,3 +13,6 @@ Repository Ini Berisi Progres Capstone Aiman
 **14 Mei 2021**  
 
   * Mengubah wireframe Forum Diskusi, Profil Pengguna, Profil Kucing ke dalam bentuk UI/UX di Figma (Sore - Malam Hari)
+
+**15 Mei 2022**
+  * Belum menambahkan progres baru 
