@@ -1,14 +1,23 @@
 import os
+import mysql.connector
+from flask import Flask, jsonify, request
 
-from flask import Flask
 
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello_world():
-    name = os.environ.get("NAME", "Bismillah")
-    return "Hello {}!".format(name)
+@app.route("/login", methods=['GET', 'POST'])
+def getLogin():
+    data = [{'username': 'danala04', 'password': 123},
+            {'username': 'iik1412', 'password': 123}]
+    username = request.args.get('username')
+    password = request.args.get('password')
+    if username=="danala04":
+        return jsonify(data) 
+    else:
+        return "Akun tidak ada", 403
+    
+
 
 
 if __name__ == "__main__":
