@@ -1,17 +1,15 @@
 import os
 from flask import Flask, jsonify, request
 
-
 app = Flask(__name__)
 
 
 @app.route("/login", methods=['GET', 'POST'])
 def getLogin():
-    data = [{'username': 'danala04', 'password': 123},
-            {'username': 'iik1412', 'password': 123}]
+    data = [{'username': 'danala04', 'password': 123, 'name': 'Daffa Nabil Libriana'}]
     username = request.args.get('username')
     password = request.args.get('password')
-    if username=="danala04":
+    if username=="danala04" and password=="123":
         return jsonify(data) 
     else:
         return "Akun tidak ada", 403
