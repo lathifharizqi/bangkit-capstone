@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    name = os.environ.get("NAME", "Word")
+    name = os.environ.get("NAME", "Bismillah")
     return "Hello {}!".format(name)
 
 
