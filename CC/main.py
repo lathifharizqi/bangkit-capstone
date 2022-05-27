@@ -1,6 +1,10 @@
 import os
-import mysql.connector
 from flask import Flask, jsonify, request
+
+import mysql.connector
+import pandas as pd
+import numpy as np
+import sys
 
 app = Flask(__name__)
 
@@ -13,7 +17,15 @@ def getLogin():
         return jsonify(data) 
     else:
         return "Akun tidak ada", 403
-    
+
+@app.route("/getlogin", methods=['GET', 'POST'])
+def login():
+    cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
+    cursor = cnx.cursor()
+    cursor.execute("select * from user;")
+    result = cursor.fetchall()
+    cnx.close()
+    return (result[1][0])   
 
 
 
