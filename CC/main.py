@@ -5,27 +5,31 @@ import mysql.connector
 import pandas as pd
 import numpy as np
 import sys
+import json
 
 app = Flask(__name__)
 
 @app.route("/login", methods=['GET', 'POST'])
-def getLogin():
-    data = [{'username': 'danala04', 'password': 123, 'name': 'Daffa Nabil Libriana'}]
-    username = request.args.get('username')
-    password = request.args.get('password')
-    if username=="danala04" and password=="123":
-        return jsonify(data) 
-    else:
-        return "Akun tidak ada", 403
-
-@app.route("/getlogin", methods=['GET', 'POST'])
 def login():
+    paramUsername = str(request.args.get("username"))
+    paramPass = str(request.args.get("password"))
+
+    #database connect
     cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
     cursor = cnx.cursor()
+
+    #query
     cursor.execute("select * from user;")
-    result = cursor.fetchall()
+    row_headers=[x[0] for x in cursor.description]
+    rv = cursor.fetchall()
+    json_data = []
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
     cnx.close()
-    return (result[1][0])   
+
+    #finding algorithm
+    result = next((item for item in json_data if item["username"] == paramUsername and item["password"] == paramPass), "akun tidak ditemukan")
+    return jsonify(result)
 
 
 
