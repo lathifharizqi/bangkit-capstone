@@ -28,8 +28,19 @@ def login():
     cnx.close()
 
     #finding algorithm
-    result = next((item for item in json_data if item["username"] == paramUsername and item["password"] == paramPass), "akun tidak ditemukan")
-    return jsonify(result)
+    result = next((item for item in json_data if item["username"] == paramUsername and item["password"] == paramPass), None)
+    if result != None:
+        jsonResult = {
+            "error" : False,
+            "message" : "success",
+            "loginResult" : result
+        }
+    else:
+        jsonResult = {
+            "error" : True,
+            "message" : "failed",
+        }
+    return jsonify(jsonResult)
 
 
 
