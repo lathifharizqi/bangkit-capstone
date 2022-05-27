@@ -4,6 +4,8 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
+cnx.close()
 
 @app.route("/login", methods=['GET', 'POST'])
 def getLogin():
