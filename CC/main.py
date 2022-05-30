@@ -32,7 +32,7 @@ def login():
     if result != None:
         jsonResult = {
             "error" : False,
-            "message" : "success",
+            "message" : "successs",
             "loginResult" : result
         }
     else:
