@@ -52,23 +52,27 @@ def forum():
     cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
     cursor = cnx.cursor()
 
-    #query
-    cursor.execute("select * from forum;")
-    row_headers=[x[0] for x in cursor.description]
-    rv = cursor.fetchall()
-    json_data = []
-    for result in rv:
-        json_data.append(dict(zip(row_headers,result)))
-    cnx.close()
+    if request.method == 'POST':
+        return "tes"
+    else:
+       #query
+        cursor.execute("select * from forum;")
+        row_headers=[x[0] for x in cursor.description]
+        rv = cursor.fetchall()
+        json_data = []
+        for result in rv:
+            json_data.append(dict(zip(row_headers,result)))
+        cnx.close()
 
-    jsonResult = {
-            "error" : False,
-            "message" : "success",
-            "getForumResult" : json_data
-        }
+        jsonResult = {
+                "error" : False,
+                "message" : "success",
+                "getForumResult" : json_data
+            }
 
 
-    return jsonify(jsonResult)
+        return jsonify(jsonResult)
+    
 
 
 if __name__ == "__main__":
