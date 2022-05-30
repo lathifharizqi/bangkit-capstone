@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def api():
-    return "server jalan"
+    return "server femeow jalan"
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -53,7 +53,20 @@ def forum():
     cursor = cnx.cursor()
 
     if request.method == 'POST':
-        return "tes"
+        content_type = request.headers.get('Content-Type')
+        if (content_type == 'application/json'):
+            json = request.json
+
+            #query
+            query = "INSERT INTO `forum` (`idPost`, `title`, `body`, `haveImage`, `imageBase64`, `breed`, `dateCreated`, `createdBy`) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(json['title'],json['body'],json['haveImage'],json['imageBase64'],json['breed'],json['dateCreated'],json['createdBy'])
+            cursor.execute(query)
+            result = cursor.fetchone()
+            cnx.commit()
+            cnx.close()
+
+            return ("Post berhasil diupload!")
+        else:
+            return 'Content-Type not supported!'
     else:
        #query
         cursor.execute("select * from forum;")
