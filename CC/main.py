@@ -9,6 +9,10 @@ import json
 
 app = Flask(__name__)
 
+@app.route("/", methods=['GET', 'POST'])
+def api():
+    return "server femeow jalan"
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     paramUsername = str(request.args.get("username"))
@@ -42,6 +46,46 @@ def login():
         }
     return jsonify(jsonResult)
 
+@app.route("/forum", methods=['GET', 'POST'])
+def forum():
+    #database connect
+    cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
+    cursor = cnx.cursor()
+
+    if request.method == 'POST':
+        content_type = request.headers.get('Content-Type')
+        if (content_type == 'application/json'):
+            json = request.json
+
+            #query
+            query = "INSERT INTO `forum` (`idPost`, `title`, `body`, `haveImage`, `imageBase64`, `breed`, `dateCreated`, `createdBy`) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(json['title'],json['body'],json['haveImage'],json['imageBase64'],json['breed'],json['dateCreated'],json['createdBy'])
+            cursor.execute(query)
+            result = cursor.fetchone()
+            cnx.commit()
+            cnx.close()
+
+            return ("Post berhasil diupload!")
+        else:
+            return 'Content-Type not supported!'
+    else:
+       #query
+        cursor.execute("select * from forum;")
+        row_headers=[x[0] for x in cursor.description]
+        rv = cursor.fetchall()
+        json_data = []
+        for result in rv:
+            json_data.append(dict(zip(row_headers,result)))
+        cnx.close()
+
+        jsonResult = {
+                "error" : False,
+                "message" : "success",
+                "getForumResult" : json_data
+            }
+
+
+        return jsonify(jsonResult)
+    
 
 
 if __name__ == "__main__":
