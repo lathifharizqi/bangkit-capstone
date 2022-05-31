@@ -64,7 +64,11 @@ def forum():
             cnx.commit()
             cnx.close()
 
-            return ("Post berhasil diupload!")
+            result = {
+                "error" : False,
+                "message" : "success",
+            }
+            return result
         else:
             return 'Content-Type not supported!'
     else:
