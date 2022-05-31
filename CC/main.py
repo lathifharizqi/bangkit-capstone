@@ -48,7 +48,7 @@ def register():
             cursor = cnx.cursor()
 
             #query
-            query = "INSERT INTO `user` (`username`, `password`, `nama_lengkap`) VALUES ('{}', '{}', '{}')".format(json['username'],json['password'],json['nama_lengkap'])
+            query = "INSERT INTO `user` (`username`, `password`, `nama_lengkap`, `phoneNumber`, `location`) VALUES ('{}', '{}', '{}', '{}', '{}')".format(json['username'],json['password'],json['nama_lengkap'],json['phoneNumber'],json['location'])
             cursor.execute(query)
             result = cursor.fetchone()
             cnx.commit()
