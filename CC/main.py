@@ -98,14 +98,14 @@ def login():
         else:
             jsonResult = {
                 "error" : True,
-                "message" : "failed",
+                "message" : "login failed",
             }
         return jsonify(jsonResult)
 
     else:
         jsonResult = {
                 "error" : True,
-                "message" : "failed",
+                "message" : "please using POST Method",
             }
         return (jsonResult)
 
