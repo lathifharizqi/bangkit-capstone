@@ -197,3 +197,7 @@
   "message" : "success",
 }</code></pre></li>
 </ul>
+
+<h1>Database Architecture</h1>
+
+![relasi](https://user-images.githubusercontent.com/87354757/171179897-67753a57-16dc-4dd3-addb-a8df9629f094.jpg)
