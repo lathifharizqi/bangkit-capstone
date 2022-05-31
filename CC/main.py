@@ -105,7 +105,7 @@ def login():
     else:
         jsonResult = {
                 "error" : True,
-                "message" : "failed",
+                "message" : "please using POST Method",
             }
         return (jsonResult)
 
