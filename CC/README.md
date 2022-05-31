@@ -3,6 +3,31 @@
 <h1>Endpoint</h1>
 <p><a href="https://story-api.dicoding.dev/v1" target="_blank" rel="noopener">https://femeowrun-3m2kqa2azq-uc.a.run.app/</a></p>
 
+<h1>Register</h1>
+<ul>
+	<li>URL
+		<ul>
+			<li><code>/register</code></li>
+		</ul>
+	</li>
+  <li>Request Body
+  <ul>
+    <li><code>username</code> as <code>string</code></li>
+    <li><code>password</code> as <code>string</code></li>
+    <li><code>nama_lengkap</code> as <code>string</code></li>
+  </ul>
+	</li>
+	<li>Method
+		<ul>
+			<li>POST</li>
+		</ul>
+	</li>
+	<li>Response<pre v-pre="" data-lang="json"><code class="lang-json">{
+  "error": false,
+  "message": "success"
+}</code></pre></li>
+</ul>
+
 <h1>Login</h1>
 <ul>
 	<li>URL
@@ -10,7 +35,7 @@
 			<li><code>/login</code></li>
 		</ul>
 	</li>
-  <li>Parameters
+  <li>Request Body
   <ul>
     <li><code>username</code> as <code>string</code></li>
     <li><code>password</code> as <code>string</code></li>
@@ -18,7 +43,7 @@
 	</li>
 	<li>Method
 		<ul>
-			<li>GET</li>
+			<li>POST</li>
 		</ul>
 	</li>
 	<li>Response<pre v-pre="" data-lang="json"><code class="lang-json">{
@@ -83,11 +108,11 @@
 		<ul>
 			<li><code>title</code> as <code>string</code></li>
 			<li><code>body</code> as <code>string</code></li>
-      <li><code>breed</code> as <code>string</code>, optional</li>
-      <li><code>createdBy</code> as <code>string</code></li>
-      <li><code>dateCreated</code> as <code>string</code>, example <code>yy-mm-dd</code></li>
-      <li><code>haveimage</code> as <code>int</code></li>
-      <li><code>imageBase64</code> as <code>string</code>, optional</li>
+		      <li><code>breed</code> as <code>string</code>, optional</li>
+		      <li><code>createdBy</code> as <code>string</code></li>
+		      <li><code>dateCreated</code> as <code>string</code>, example <code>yy-mm-dd</code></li>
+		      <li><code>haveimage</code> as <code>int</code></li>
+		      <li><code>imageBase64</code> as <code>string</code>, optional</li>
 		</ul>
 	</li>
 	<li>Method
@@ -96,7 +121,79 @@
 		</ul>
 	</li>
 	<li>Response<pre v-pre="" data-lang="json"><code class="lang-json">{
-  "error" : False,
+  "error" : false,
+  "message" : "success",
+}</code></pre></li>
+</ul>
+
+<h1>Get Comment</h1>
+<ul>
+	<li>URL
+		<ul>
+			<li><code>/comment</code></li>
+		</ul>
+	</li>
+	<li>Parameters
+		<ul>
+			<li><code>idPost</code> as <code>int</code></li>
+		</ul>
+	</li>
+	<li>Method
+		<ul>
+			<li>GET</li>
+		</ul>
+	</li>
+	<li>Response<pre v-pre="" data-lang="json"><code class="lang-json">{
+  "error": false,
+  "getCommentResult": [
+    {
+      "body": "tes komen",
+      "createdBy": "iik1412",
+      "dateCreated": "Tue, 31 May 2022 00:00:00 GMT",
+      "idPost": 3,
+      "nama_lengkap": "M Lathif Harizky"
+    },
+    {
+      "body": "bales",
+      "createdBy": "danala04",
+      "dateCreated": "Wed, 01 Jun 2022 00:00:00 GMT",
+      "idPost": 3,
+      "nama_lengkap": "Daffa Nabil Libriana"
+    },
+    {
+      "body": "tes komen 3",
+      "createdBy": "danala04",
+      "dateCreated": "Fri, 03 Jun 2022 00:00:00 GMT",
+      "idPost": 3,
+      "nama_lengkap": "Daffa Nabil Libriana"
+    }
+  ],
+  "message": "success"
+}</code></pre></li>
+</ul>
+
+<h1>Add New Comment</h1>
+<ul>
+	<li>URL
+		<ul>
+			<li><code>/comment</code></li>
+		</ul>
+	</li>
+	<li>Request Body
+		<ul>
+			<li><code>body</code> as <code>string</code></li>
+		      <li><code>createdBy</code> as <code>string</code></li>
+		      <li><code>dateCreated</code> as <code>string</code>, example <code>yy-mm-dd</code></li>
+		      <li><code>idPost</code> as <code>int</code></li>
+		</ul>
+	</li>
+	<li>Method
+		<ul>
+			<li>POST</li>
+		</ul>
+	</li>
+	<li>Response<pre v-pre="" data-lang="json"><code class="lang-json">{
+  "error" : false,
   "message" : "success",
 }</code></pre></li>
 </ul>
