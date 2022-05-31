@@ -13,6 +13,60 @@ app = Flask(__name__)
 def api():
     return "server femeow jalan"
 
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+
+    if request.method == 'POST':
+        
+        json = request.json
+
+       #database connect
+        cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
+        cursor = cnx.cursor()
+
+        #query
+        cursor.execute("select username from user;")
+        row_headers=[x[0] for x in cursor.description]
+        rv = cursor.fetchall()
+        json_data = []
+        for result in rv:
+            json_data.append(dict(zip(row_headers,result)))
+        cnx.close()
+
+        #finding algorithm
+        result = next((item for item in json_data if item["username"] == json['username']), None)
+        if result != None:
+            
+            jsonResult = {
+                "error" : True,
+                "message" : "failed",
+            }
+        else:
+
+            #database connect
+            cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
+            cursor = cnx.cursor()
+
+            #query
+            query = "INSERT INTO `user` (`username`, `password`, `nama_lengkap`) VALUES ('{}', '{}', '{}')".format(json['username'],json['password'],json['nama_lengkap'])
+            cursor.execute(query)
+            result = cursor.fetchone()
+            cnx.commit()
+            cnx.close()
+
+            jsonResult = {
+                "error" : False,
+                "message" : "success",
+            }
+        return jsonify(jsonResult)
+
+    else:
+        jsonResult = {
+                "error" : True,
+                "message" : "failed",
+            }
+        return (jsonResult)
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 
