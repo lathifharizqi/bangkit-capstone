@@ -16,3 +16,7 @@ Repository Ini Berisi Progres Capstone Aiman
 
 **15 Mei 2022**
   * Belum menambahkan progres baru 
+
+**3 Juni 2022**
+  * Menambahkan halaman detail forum (belum selesai) 
+  * Memperbaiki Tampilan sesuai UI/UX
