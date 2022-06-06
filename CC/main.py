@@ -135,11 +135,11 @@ def forum():
         imageLink = blob.public_url
         
         #query
-        query = "INSERT INTO `forum` (`idPost`, `title`, `body`, `haveImage`, `imageBase64`, `breed`, `dateCreated`, `createdBy`) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(title,body,haveImage,imageLink,breed,dateCreated,createdBy)
-        cursor.execute(query)
-        result = cursor.fetchone()
-        cnx.commit()
-        cnx.close()
+        #query = "INSERT INTO `forum` (`idPost`, `title`, `body`, `haveImage`, `imageBase64`, `breed`, `dateCreated`, `createdBy`) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(title,body,haveImage,imageLink,breed,dateCreated,createdBy)
+        #cursor.execute(query)
+        #result = cursor.fetchone()
+        #cnx.commit()
+        #cnx.close()
 
         result = {
             "error" : False,
