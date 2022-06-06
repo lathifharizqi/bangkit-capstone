@@ -118,27 +118,37 @@ def forum():
     cursor = cnx.cursor()
 
     if request.method == 'POST':
-        content_type = request.headers.get('Content-Type')
-        if (content_type == 'application/json'):
-            json = request.json
+        title = request.files.get('title')
+        body = request.files.get('body')
+        haveImage = request.files.get('haveImage')
+        breed = request.files.get('breed')
+        dateCreated = request.files.get('dateCreated')
+        createdBy = request.files.get('createdBy')
+        uploaded_file = request.files.get('file')
+        storage_client = storage.Client()
+        bucket = storage_client.bucket("femeowstorage")
+        blob = bucket.blob(uploaded_file.filename)
+        blob.upload_from_string(
+            uploaded_file.read(),
+            content_type=uploaded_file.content_type
+        )
+        imageLink = blob.public_url
+        
+        #query
+        query = "INSERT INTO `forum` (`idPost`, `title`, `body`, `haveImage`, `imageBase64`, `breed`, `dateCreated`, `createdBy`) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(title,body,haveImage,imageLink,breed,dateCreated,createdBy)
+        cursor.execute(query)
+        result = cursor.fetchone()
+        cnx.commit()
+        cnx.close()
 
-            #query
-            query = "INSERT INTO `forum` (`idPost`, `title`, `body`, `haveImage`, `imageBase64`, `breed`, `dateCreated`, `createdBy`) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(json['title'],json['body'],json['haveImage'],json['imageBase64'],json['breed'],json['dateCreated'],json['createdBy'])
-            cursor.execute(query)
-            result = cursor.fetchone()
-            cnx.commit()
-            cnx.close()
-
-            result = {
-                "error" : False,
-                "message" : "success",
-            }
-            return result
-        else:
-            return 'Content-Type not supported!'
+        result = {
+            "error" : False,
+            "message" : "success",
+        }
+        return result
     else:
        #query
-        cursor.execute("SELECT f.idPost, f.title, f.body, f.haveImage, f.imageBase64, f.breed, f.dateCreated, f.createdBy, u.nama_lengkap FROM forum f LEFT OUTER JOIN user u ON f.createdBy=u.username;")
+        cursor.execute("SELECT f.idPost, f.title, f.body, f.haveImage, f.imageBase64 as imageLink, f.breed, f.dateCreated, f.createdBy, u.nama_lengkap FROM forum f LEFT OUTER JOIN user u ON f.createdBy=u.username;")
         row_headers=[x[0] for x in cursor.description]
         rv = cursor.fetchall()
         json_data = []
@@ -217,7 +227,7 @@ def upload():
     else:
         storage_client = storage.Client()
         bucket = storage_client.bucket("femeowstorage")
-        blob = bucket.blob("tes.jpg")
+        blob = bucket.blob("tes")
         return blob.public_url
     
 
