@@ -144,6 +144,7 @@ def forum():
         result = {
             "error" : False,
             "message" : "success",
+            "imageLink" : imageLink
         }
         return result
     else:
