@@ -204,10 +204,22 @@ def comment():
 
 @app.route('/upload', methods=['GET',' POST'])
 def upload():
-    storage_client = storage.Client()
-    bucket = storage_client.bucket("femeowstorage")
-    blob = bucket.blob("tes.jpg")
-    return blob.public_url
+    if request.method == 'POST':
+        uploaded_file = request.files.get('file')
+        storage_client = storage.Client()
+        bucket = storage_client.bucket("femeowstorage")
+        blob = bucket.blob(uploaded_file.filename)
+        blob.upload_from_string(
+            uploaded_file.read(),
+            content_type=uploaded_file.content_type
+        )
+        return blob.public_url
+    else:
+        storage_client = storage.Client()
+        bucket = storage_client.bucket("femeowstorage")
+        blob = bucket.blob("tes.jpg")
+        return blob.public_url
+    
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
