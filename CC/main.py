@@ -118,12 +118,12 @@ def forum():
     cursor = cnx.cursor()
 
     if request.method == 'POST':
-        title = request.files.get('title')
-        body = request.files.get('body')
-        haveImage = request.files.get('haveImage')
-        breed = request.files.get('breed')
-        dateCreated = request.files.get('dateCreated')
-        createdBy = request.files.get('createdBy')
+        title = request.form.get('title')
+        body = request.form.get('body')
+        haveImage = request.form.get('haveImage')
+        breed = request.form.get('breed')
+        dateCreated = request.form.get('dateCreated')
+        createdBy = request.form.get('createdBy')
         uploaded_file = request.files.get('file')
         storage_client = storage.Client()
         bucket = storage_client.bucket("femeowstorage")
