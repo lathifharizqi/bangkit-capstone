@@ -1,5 +1,7 @@
 import os
+import logging
 from flask import Flask, jsonify, request
+from google.cloud import storage
 
 import mysql.connector
 import pandas as pd
@@ -199,6 +201,13 @@ def comment():
 
 
         return jsonify(jsonResult)
+
+@app.route('/upload', methods=['GET',' POST'])
+def upload():
+    storage_client = storage.Client()
+    bucket = storage_client.bucket("femeowstorage")
+    blob = bucket.blob("tes.jpg")
+    return blob.public_url
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

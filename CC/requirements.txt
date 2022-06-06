@@ -2,3 +2,4 @@ Flask
 gunicorn
 mysql.connector
 pandas
+google-cloud-storage
