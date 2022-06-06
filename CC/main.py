@@ -202,7 +202,7 @@ def comment():
 
         return jsonify(jsonResult)
 
-@app.route('/upload', methods=['GET',' POST'])
+@app.route('/upload', methods=['GET','POST'])
 def upload():
     if request.method == 'POST':
         uploaded_file = request.files.get('file')
