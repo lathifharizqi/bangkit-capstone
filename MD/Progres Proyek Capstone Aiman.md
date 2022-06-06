@@ -22,3 +22,6 @@ Repository Ini Berisi Progres Capstone Aiman
   * Memperbaiki Tampilan sesuai UI/UX
 **5 Juni 2022**
   * Belum menambahkan fitur lagi
+**6 Juni 2022**
+  * Berhasil GET gambar, karena sudah diubah oleh tim cc menjadi form
+  * Berhasil memindahkan variabel (judul, deskripsi, gambar, dll) dari forum ke detail forum
