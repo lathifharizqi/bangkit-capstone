@@ -120,13 +120,12 @@ def forum():
     if request.method == 'POST':
         title = request.form.get('title')
         body = request.form.get('body')
-        haveImage = request.form.get('haveImage')
         breed = request.form.get('breed')
         dateCreated = request.form.get('dateCreated')
         createdBy = request.form.get('createdBy')
-        uploaded_file = request.files.get('file', False)
+        uploaded_file = request.files.get('file', "")
         
-        if (uploaded_file != False):
+        if (uploaded_file != ""):
             storage_client = storage.Client()
             bucket = storage_client.bucket("femeowstorage")
             blob = bucket.blob(uploaded_file.filename)
@@ -135,8 +134,10 @@ def forum():
                 content_type=uploaded_file.content_type
             )
             imageLink = blob.public_url
+            haveImage = 1
         else :
             imageLink = ""
+            haveImage = 0
         
         #query
         query = "INSERT INTO `forum` (`idPost`, `title`, `body`, `haveImage`, `imageBase64`, `breed`, `dateCreated`, `createdBy`) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(title,body,haveImage,imageLink,breed,dateCreated,createdBy)
