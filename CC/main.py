@@ -239,6 +239,32 @@ def upload():
         blob = bucket.blob("tes")
         return blob.public_url
     
+@app.route("/display", methods=['GET', 'POST'])
+def display():
+    #database connect
+    cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
+    cursor = cnx.cursor()
+
+    #query
+    query="SELECT * from breed;"
+    cursor.execute(query)
+    row_headers=[x[0] for x in cursor.description]
+    rv = cursor.fetchall()
+    json_data = []
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+    cnx.close()
+
+    jsonResult = {
+            "error" : False,
+            "message" : "success",
+            "getCommentResult" : json_data
+        }
+
+
+    return jsonify(jsonResult)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
