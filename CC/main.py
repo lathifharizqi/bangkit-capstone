@@ -257,21 +257,21 @@ def display():
     jsonResult = {
             "error" : False,
             "message" : "success",
-            "getCommentResult" : json_data
+            "getDisplayResult" : json_data
         }
 
 
     return jsonify(jsonResult)
 
 @app.route("/search", methods=['GET', 'POST'])
-def display():
+def search():
     #database connect
     cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
     cursor = cnx.cursor()
 
     paramName = str(request.args.get("name"))
     #query
-    query="SELECT * from breed WHERE name = {}".format(paramName)
+    query="SELECT * from breed WHERE name LIKE '%{}%'".format(paramName)
     cursor.execute(query)
     row_headers=[x[0] for x in cursor.description]
     rv = cursor.fetchall()
@@ -279,14 +279,13 @@ def display():
     for result in rv:
         json_data.append(dict(zip(row_headers,result)))
     cnx.close()
-
+    
     jsonResult = {
-            "error" : False,
-            "message" : "success",
-            "getCommentResult" : json_data
+        "error" : False,
+        "message" : "success",
+        "getSearchResult" : json_data
         }
-
-
+        
     return jsonify(jsonResult)
 
 
