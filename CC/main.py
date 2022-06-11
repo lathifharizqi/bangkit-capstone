@@ -181,24 +181,23 @@ def comment():
     cursor = cnx.cursor()
 
     if request.method == 'POST':
-        content_type = request.headers.get('Content-Type')
-        if (content_type == 'application/json'):
-            json = request.json
-
-            #query
-            query = "INSERT INTO `comment` (`idComment`, `dateCreated`, `body`, `createdBy`, `idPost`) VALUES (NULL, '{}', '{}', '{}', '{}')".format(json['dateCreated'],json['body'],json['createdBy'],json['idPost'])
-            cursor.execute(query)
-            result = cursor.fetchone()
-            cnx.commit()
-            cnx.close()
-
-            result = {
-                "error" : False,
-                "message" : "success",
+        body = request.form.get('body')
+        dateCreated = request.form.get('dateCreated')
+        createdBy = request.form.get('createdBy')
+        idPost= request.form.get('idPost')
+        
+        #query
+        query = "INSERT INTO `comment` (`idComment`, `body`, `dateCreated`, `createdBy`, `idPost`) VALUES (NULL, '{}', '{}', '{}', '{}')".format(body,dateCreated,createdBy,idPost)
+        cursor.execute(query)
+        result = cursor.fetchone()
+        cnx.commit()
+        cnx.close()
+        
+        result = {
+            "error" : False,
+            "message" : "success",
             }
-            return result
-        else:
-            return 'Content-Type not supported!'
+        return result
     else:
 
         paramIdPost = str(request.args.get("idPost"))
@@ -247,6 +246,32 @@ def display():
 
     #query
     query="SELECT * from breed;"
+    cursor.execute(query)
+    row_headers=[x[0] for x in cursor.description]
+    rv = cursor.fetchall()
+    json_data = []
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+    cnx.close()
+
+    jsonResult = {
+            "error" : False,
+            "message" : "success",
+            "getCommentResult" : json_data
+        }
+
+
+    return jsonify(jsonResult)
+
+@app.route("/search", methods=['GET', 'POST'])
+def display():
+    #database connect
+    cnx = mysql.connector.connect(user='root', password='123', host='34.68.201.197', database='femeow')
+    cursor = cnx.cursor()
+
+    paramName = str(request.args.get("name"))
+    #query
+    query="SELECT * from breed WHERE name = {}".format(paramName)
     cursor.execute(query)
     row_headers=[x[0] for x in cursor.description]
     rv = cursor.fetchall()
