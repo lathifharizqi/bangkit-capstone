@@ -280,10 +280,16 @@ def search():
         json_data.append(dict(zip(row_headers,result)))
     cnx.close()
     
-    jsonResult = {
-        "error" : False,
-        "message" : "success",
-        "getSearchResult" : json_data
+    if not json_data:
+        jsonResult = {
+            "error" : True,
+            "message" : "Breed not found !",
+        }
+    else:
+        jsonResult = {
+            "error" : False,
+            "message" : "success",
+            "getSearchResult" : json_data
         }
         
     return jsonify(jsonResult)
