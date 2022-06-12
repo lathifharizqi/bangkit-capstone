@@ -217,7 +217,36 @@
 	</li>
 	<li>Response<pre v-pre="" data-lang="json"><code class="lang-json">{
   "error": false,
-    "getCommentResult": [
+    "getDisplayResult": [
+        {
+            "description": "Kucing persia adalah ras kucing domestik berbulu panjang dengan karakter wajah bulat dan moncong pendek. Namanya mengacu pada Persia, nama lama Iran, di mana kucing serupa ditemukan. Sejak akhir abad 19, kucing jenis ini dikembangkan di Britania Raya dan Amerika Serikat usai Perang Dunia II. Di Britania Raya, ras ini disebut kucing bulu panjang Persia, dibagi dalam dua jenis, yaitu Chinchilla dengan warna perak cerah dan yang agak gelap.\r\n\r\nSeperti halnya dengan ras Siam, telah ada upaya oleh beberapa peternak untuk melestarikan ras kucing yang lebih tua, ras tradisional, yang memiliki moncong lebih jelas, yang lebih akrab dengan masyarakat umumnya.\r\n\r\nPembiakan selektif yang dilakukan oleh peternak telah memungkinkan pengembangan berbagai warna bulu, tetapi juga menyebabkan makin datarnya wajah, yang mungkin membawakan sejumlah masalah kesehatan. Penyakit ginjal polikistik turunan lazim dialami oleh ras ini, yang mempengaruhi hampir separuh populasinya di beberapa negara.",
+            "idBreed": 1,
+            "image": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Kemra2.jpg",
+            "name": "Persian"
+        },
+}</code></pre></li>
+</ul>
+
+<h1>Get Search</h1>
+<ul>
+	<li>URL
+		<ul>
+			<li><code>/search</code></li>
+		</ul>
+	</li>
+	<li>Parameters
+		<ul>
+			<li><code>name</code> as <code>int</code></li>
+		</ul>
+	</li>
+	<li>Method
+		<ul>
+			<li>GET</li>
+		</ul>
+	</li>
+	<li>Response<pre v-pre="" data-lang="json"><code class="lang-json">{
+  "error": false,
+    "getSearchResult": [
         {
             "description": "Kucing persia adalah ras kucing domestik berbulu panjang dengan karakter wajah bulat dan moncong pendek. Namanya mengacu pada Persia, nama lama Iran, di mana kucing serupa ditemukan. Sejak akhir abad 19, kucing jenis ini dikembangkan di Britania Raya dan Amerika Serikat usai Perang Dunia II. Di Britania Raya, ras ini disebut kucing bulu panjang Persia, dibagi dalam dua jenis, yaitu Chinchilla dengan warna perak cerah dan yang agak gelap.\r\n\r\nSeperti halnya dengan ras Siam, telah ada upaya oleh beberapa peternak untuk melestarikan ras kucing yang lebih tua, ras tradisional, yang memiliki moncong lebih jelas, yang lebih akrab dengan masyarakat umumnya.\r\n\r\nPembiakan selektif yang dilakukan oleh peternak telah memungkinkan pengembangan berbagai warna bulu, tetapi juga menyebabkan makin datarnya wajah, yang mungkin membawakan sejumlah masalah kesehatan. Penyakit ginjal polikistik turunan lazim dialami oleh ras ini, yang mempengaruhi hampir separuh populasinya di beberapa negara.",
             "idBreed": 1,
