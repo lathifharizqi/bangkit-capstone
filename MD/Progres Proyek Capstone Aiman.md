@@ -36,3 +36,9 @@ Repository Ini Berisi Progres Capstone Aiman
   * Berhasil menanam Detail Forum ke dalam fragment yang disediakan Yafi
   * Berhasil menampilkan Get Comment sesuai idPost recyclerview
   * Meminta tim CC untuk merubah Jenis Post Comment menjadi Form-Data
+
+**12 Juni**
+  * Berhasil menangani error activity add image 
+  * Berhasil menambahkan shared preferences
+  * Mengirim bagian coding saya ke yafi untuk disempurnakan
+ 
