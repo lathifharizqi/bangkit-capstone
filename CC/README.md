@@ -258,4 +258,10 @@
 
 <h1>Database Architecture</h1>
 
-![image](https://user-images.githubusercontent.com/87354757/171211122-232af36d-2157-4489-91fe-3d7edd2d19aa.png)
+![femeow database architecture](https://user-images.githubusercontent.com/86942956/173242379-d487fadf-dc15-47b9-83e3-d2c74d99857b.jpg)
+
+<h1>Cloud Architecture</h1>
+
+![cloud architecture](https://user-images.githubusercontent.com/86942956/173242394-c814721f-2159-474a-aec3-b851ab98b7d8.jpeg)
+
+
